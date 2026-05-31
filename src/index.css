@@ -1,12 +1,17 @@
 /* --- Global Variables & Resets --- */
 :root {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --accent-color: #38bdf8;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --border-color: #334155;
+  /* Blue neon theme */
+  --bg-primary: #050816;
+  --bg-secondary: #081227;
+  --accent-color: #00f5ff;
+  --accent-color-2: #7c3aed;
+  --accent-glow: rgba(0, 245, 255, 0.55);
+  --accent-glow-soft: rgba(0, 245, 255, 0.22);
+  --text-main: #eafaff;
+  --text-muted: rgba(234, 250, 255, 0.72);
+  --border-color: rgba(56, 189, 248, 0.28);
   --transition-speed: 0.3s;
+
 
   /* Animation tokens */
   --anim-fast: 180ms;
@@ -43,21 +48,128 @@ body {
   line-height: 1.6;
 }
 
+/* Neon animated background (blue) */
+.neon-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.neon-bg::before {
+  content: "";
+  position: absolute;
+  inset: -20vh -20vw;
+  background:
+    radial-gradient(800px circle at 20% 10%, rgba(0, 245, 255, 0.22), transparent 55%),
+    radial-gradient(1000px circle at 85% 30%, rgba(124, 58, 237, 0.12), transparent 60%),
+    radial-gradient(700px circle at 40% 95%, rgba(0, 245, 255, 0.12), transparent 55%);
+  animation: neonBloom 6s var(--anim-ease) infinite;
+  opacity: 0.9;
+}
+
+.neon-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(0, 245, 255, 0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 245, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.08), transparent 55%);
+  background-size: 72px 72px, 72px 72px, auto;
+  background-position: 0% 0%, 50% 50%, center;
+  opacity: 0.35;
+  animation: neonDrift 12s linear infinite;
+  mask-image: radial-gradient(circle at 50% 40%, black 0%, black 55%, transparent 75%);
+}
+
+/* Base site glow: keep it subtle but present */
+.glow-alive {
+  animation: glowPulse 2.6s var(--anim-ease) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-bg::before,
+  .neon-bg::after,
+  .glow-alive {
+    animation: none !important;
+  }
+}
+
+/* Continuous glow accents */
+.section-title::after,
+.navbar .nav-logo,
+.highlight,
+.hero-content h1,
+.skill-card,
+.project-card,
+.about-me-card,
+.resume-card,
+.contact-form {
+  animation: glowPulse 2.8s var(--anim-ease) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-title::after,
+  .navbar .nav-logo,
+  .highlight,
+  .hero-content h1,
+  .skill-card,
+  .project-card,
+  .about-me-card,
+  .resume-card,
+  .contact-form {
+    animation: none !important;
+  }
+}
+
+
+
 /* --- Reusable Animation Utilities --- */
 @keyframes glowPulse {
+
   0% {
-    filter: drop-shadow(0 0 0 rgba(56, 189, 248, 0));
+    filter: drop-shadow(0 0 0 rgba(0, 245, 255, 0));
     opacity: 1;
   }
   50% {
-    filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.35));
+    filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.55));
     opacity: 1;
   }
   100% {
-    filter: drop-shadow(0 0 0 rgba(56, 189, 248, 0));
+    filter: drop-shadow(0 0 0 rgba(0, 245, 255, 0));
     opacity: 1;
   }
 }
+
+/* Continuous blue-neon bloom */
+@keyframes neonBloom {
+  0% {
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(28px);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate3d(0, -10px, 0) scale(1.02);
+    filter: blur(34px);
+  }
+  100% {
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(28px);
+  }
+}
+
+@keyframes neonDrift {
+  0% {
+    background-position: 0% 0%, 50% 50%;
+  }
+  100% {
+    background-position: 100% 100%, 50% 50%;
+  }
+}
+
 
 @keyframes floatIn {
   from {
@@ -123,7 +235,12 @@ body {
 [data-touch-glow="true"][data-touch-glow-active="true"] {
   color: #ffffff;
   animation: touchGlowPop 180ms ease-out both;
+  text-shadow:
+    0 0 10px color-mix(in srgb, var(--touch-glow-color) 80%, transparent),
+    0 0 22px color-mix(in srgb, var(--touch-glow-color) 70%, transparent),
+    0 0 46px color-mix(in srgb, var(--touch-glow-color) 55%, transparent);
 }
+
 
 [data-touch-glow="true"] {
   transition: transform 120ms ease;
@@ -162,7 +279,10 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
+
 
 .section-title {
   font-size: 2.2rem;
@@ -262,6 +382,18 @@ body {
   max-width: 750px;
   margin: 0 auto;
 }
+
+/* Gap between reflective card and tagline (responsive) */
+.hero-gap {
+  height: 24px;
+}
+
+@media (max-width: 768px) {
+  .hero-gap {
+    height: 16px;
+  }
+}
+
 
 .avatar-container {
   margin-bottom: 20px;

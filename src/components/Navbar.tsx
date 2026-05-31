@@ -1,23 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Navbar: React.FC = () => {
   return (
     <header className="navbar">
-      <div className="nav-logo">&lt; DevPortfolio /&gt;</div>
       <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="resume-btn"
-        >
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/skills">Skills</Link>
+        <Link to="/projects">Projects</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/resume" className="resume-btn">
           Resume CV
-        </a>
+        </Link>
       </nav>
     </header>
   );
 };
+
+

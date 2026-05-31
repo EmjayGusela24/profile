@@ -46,38 +46,37 @@ const AboutMeSection: React.FC = () => {
 
         <div className="about-me-photos" aria-label="Hobby photos collage">
 
-
-          <div className="about-me-photo-touch" data-touch-glow-target="true">
+          <TextTouchGlow as="div" className="about-me-photo-touch">
             <img
               src="https://img.magnific.com/free-photo/tropical-island-turquoise-ocean-with-dramatic-cloudy-sky_84443-86108.jpg?semt=ais_hybrid&w=740&q=80"
               alt="Hobby photo 1"
             />
             <span className="about-me-photo-glow" aria-hidden="true" />
-          </div>
+          </TextTouchGlow>
 
-          <div className="about-me-photo-touch" data-touch-glow-target="true">
+          <TextTouchGlow as="div" className="about-me-photo-touch" >
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc5hTvZ0cUosCWpao-Gsy8Dl7tRIt0-0dwCw&s"
               alt="Hobby photo 2"
             />
             <span className="about-me-photo-glow" aria-hidden="true" />
-          </div>
+          </TextTouchGlow>
 
-          <div className="about-me-photo-touch" data-touch-glow-target="true">
+          <TextTouchGlow as="div" className="about-me-photo-touch" >
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVO3DQsBH735vVal9iUFJFTozvwrv4VkNVw&s"
               alt="Hobby photo 3"
             />
             <span className="about-me-photo-glow" aria-hidden="true" />
-          </div>
+          </TextTouchGlow>
 
-          <div className="about-me-photo-touch" data-touch-glow-target="true">
+          <TextTouchGlow as="div" className="about-me-photo-touch" >
             <img
               src="https://img.magnific.com/free-photo/fuji-mountain-with-milky-way-night_335224-104.jpg?semt=ais_hybrid&w=740&q=80"
               alt="Hobby photo 4"
             />
             <span className="about-me-photo-glow" aria-hidden="true" />
-          </div>
+          </TextTouchGlow>
         </div>
       </div>
     </section>

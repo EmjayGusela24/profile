@@ -1,17 +1,19 @@
 import React from "react";
 import "./App.css";
 
-import {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import {
   Navbar,
-  Hero,
-  AboutMeSection,
-  SkillsSection,
-  ProjectsSection,
-  ContactSection,
   Footer,
-  ResumeCvSection,
 } from "./components";
+
+import { HeroPage } from "./pages/HeroPage";
+import { AboutPage } from "./pages/AboutPage";
+import { SkillsPage } from "./pages/SkillsPage";
+import { ProjectsPage } from "./pages/ProjectsPage";
+import { ResumePage } from "./pages/ResumePage";
+import { ContactPage } from "./pages/ContactPage";
 
 export const App: React.FC = () => {
   const portfolioRef = React.useRef<HTMLDivElement | null>(null);
@@ -20,7 +22,7 @@ export const App: React.FC = () => {
     const el = portfolioRef.current;
     if (!el) return;
 
-    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
     if (reduceMotion) return;
 
     let raf = 0;
@@ -42,30 +44,37 @@ export const App: React.FC = () => {
     };
 
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
 
     return () => {
       if (raf) window.cancelAnimationFrame(raf);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
   return (
-    <div ref={portfolioRef} className="portfolio-container">
-      <Navbar />
-      <Hero />
-      <AboutMeSection />
-      <SkillsSection />
+    <BrowserRouter>
+      <div ref={portfolioRef} className="portfolio-container">
+        <div className="neon-bg" aria-hidden="true" />
+        <Navbar />
 
-      <ProjectsSection />
-      <ResumeCvSection />
-      <ContactSection />
-      <Footer />
-    </div>
+        <Routes>
+          <Route path="/" element={<HeroPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/skills" element={<SkillsPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 };
 
 export default App;
+
 

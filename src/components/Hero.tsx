@@ -26,7 +26,11 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
+        <div className="hero-gap" />
+
         <h2>Full-Stack Web Developer</h2>
+
+
         <p className="bio">
           I am a passionate software engineer specializing in building robust,
           scalable web applications using React and TypeScript. With a

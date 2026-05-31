@@ -163,7 +163,7 @@ const ReflectiveCard = ({
 
       <img
         ref={imgRef}
-        src="/download (1).jpg"
+        src="/5048b29a-03d5-42d3-9edd-01bd8e13d4a4.png"
         alt="Profile reflective background"
         className="reflective-photo"
       />

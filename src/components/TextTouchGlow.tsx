@@ -4,9 +4,13 @@ export type TextTouchGlowProps = {
   children: React.ReactNode;
   as?: keyof React.JSX.IntrinsicElements;
   className?: string;
+  // Allow extra props (href, role, aria-*, etc.) to pass through to the chosen element.
+  [key: string]: unknown;
 };
 
-const COLOR_PALETTE = ["#00F5FF", "#FF00FF", "#7CFF00", "#FFD400", "#8B5CFF"];
+
+// Blue-neon only (keeps the whole UI theme consistent)
+const COLOR_PALETTE = ["#00F5FF", "#00C2FF", "#1AA7FF"];
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);

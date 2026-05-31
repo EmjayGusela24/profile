@@ -1,8 +1,8 @@
 # TODO
 
-- [ ] Update `src/components/AboutMeSection.tsx` to use the existing `TextTouchGlow` for the title + list text.
-- [ ] Wrap each About Me collage photo with a touch target that triggers the same glow behavior.
-- [ ] Add any required CSS helpers to `src/index.css` for photo touch overlays/targets.
-- [ ] Run/build the app to ensure TypeScript + styling compile.
-- [ ] Manually test by touching/pressing the About Me heading, list text, and each photo.
-
+- [x] Update `src/index.css` to switch the whole site to a blue-neon theme via CSS variables.
+- [x] Add animated neon background layers (grid + bloom/vignette) in `src/index.css`.
+- [x] Add continuous glow animations for headings/cards/section borders in `src/index.css`.
+- [x] Update `src/components/TextTouchGlow.tsx` to use a blue-only neon palette.
+- [x] Ensure reduced-motion support disables continuous animations.
+- [ ] Visually verify on running dev server that full glow animation is visible and performant.
