@@ -10,9 +10,7 @@ export const Navbar: React.FC = () => {
         <Link to="/skills">Skills</Link>
         <Link to="/projects">Projects</Link>
         <Link to="/contact">Contact</Link>
-        <Link to="/resume" className="resume-btn">
-          Resume CV
-        </Link>
+        <Link to="/resume">Resume CV</Link>
       </nav>
     </header>
   );

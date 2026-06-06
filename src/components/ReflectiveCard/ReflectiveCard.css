@@ -27,9 +27,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.18) scaleX(-1);
-
-
+  /* Reduce extra scaling to keep the source photo sharper while still filling the card */
+  transform: scale(1.08) scaleX(-1);
 
   z-index: 0;
   /* hide photo until user touches/presses */
@@ -38,10 +37,21 @@
   will-change: transform;
 }
 
+
 .reflective-card-container.is-interacting .reflective-photo {
   opacity: 0.92;
 }
 
+/* Ensure the photo stays crisp (and avoids blurriness from scaling) */
+.reflective-photo {
+  image-rendering: auto;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  /* Match the reduced scale above so we don't reintroduce blur */
+  transform: scale(1.08) scaleX(-1);
+  filter: contrast(1.10) saturate(1.08) brightness(1.03);
+  will-change: opacity, filter, transform;
+}
 
 
 .reflective-noise {
@@ -221,28 +231,9 @@
   }
 }
 
-/* subtle float animation for the whole card */
-@keyframes scrollFloat {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
+/* (Removed card scroll float to avoid conflicting transforms with the page float.) */
 
-.reflective-card-container {
-  animation: scrollFloat 6s ease-in-out infinite;
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .reflective-card-container {
-    animation: none;
-  }
-}
 
 
 .card-footer {

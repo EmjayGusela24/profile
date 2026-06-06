@@ -15,58 +15,23 @@ import { ProjectsPage } from "./pages/ProjectsPage";
 import { ResumePage } from "./pages/ResumePage";
 import { ContactPage } from "./pages/ContactPage";
 
+import { PageTransition } from "./components/PageTransition";
+
 export const App: React.FC = () => {
-  const portfolioRef = React.useRef<HTMLDivElement | null>(null);
-
-  React.useEffect(() => {
-    const el = portfolioRef.current;
-    if (!el) return;
-
-    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    if (reduceMotion) return;
-
-    let raf = 0;
-    const onScroll = () => {
-      if (raf) return;
-      raf = window.requestAnimationFrame(() => {
-        raf = 0;
-        const doc = document.documentElement;
-        const scrollTop = window.scrollY || doc.scrollTop || 0;
-        const scrollable = doc.scrollHeight - window.innerHeight;
-        const progress = scrollable > 0 ? scrollTop / scrollable : 0;
-
-        // Subtle float: slightly up as you scroll down.
-        const maxOffset = 10; // px
-        const offset = -maxOffset * Math.min(1, Math.max(0, progress));
-
-        el.style.transform = `translateY(${offset.toFixed(2)}px)`;
-      });
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      if (raf) window.cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-
   return (
     <BrowserRouter>
-      <div ref={portfolioRef} className="portfolio-container">
+      <div className="portfolio-container">
         <div className="neon-bg" aria-hidden="true" />
         <Navbar />
 
+
         <Routes>
-          <Route path="/" element={<HeroPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/resume" element={<ResumePage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/" element={<PageTransition><HeroPage /></PageTransition>} />
+          <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
+          <Route path="/skills" element={<PageTransition><SkillsPage /></PageTransition>} />
+          <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
+          <Route path="/resume" element={<PageTransition><ResumePage /></PageTransition>} />
+          <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
         </Routes>
 
         <Footer />
